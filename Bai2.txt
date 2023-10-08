@@ -1,0 +1,20 @@
+import java.util.Scanner;
+
+public class Bai2 {
+
+	public static void main(String[] args) {
+		Scanner sc= new Scanner(System.in);
+		System.out.println("Nhập số bạn muốn tìm: ");
+		int input = sc.nextInt();
+		int tong = 0;
+		int n = 0;
+		for (int i = 1; i < 1000000000; i++) {
+			tong += i;
+			n++;
+			if(tong > input)break;
+		}
+		System.out.println("Số nguyên dương bé nhất là:" + n );
+		
+	}
+
+}

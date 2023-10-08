@@ -1,0 +1,84 @@
+import java.util.Scanner;
+
+public class Bai1 {
+
+	public static void main(String[] args) {
+		int people = 0;
+		int machine = 0;
+						
+		int third;
+		do {	
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Lượt của bạn, mời chọn kết quả(kéo,búa,bao): ");
+			String first = sc.nextLine();
+		int Number = (int) (Math.random()*2.6);
+		
+		String second = "";
+		
+		if(Number == 0) {
+			System.out.println("Tôi chọn Kéo");
+			second = "kéo";
+		}
+		if(Number == 1) {
+			System.out.println("Tôi chọn Búa");
+			second = "búa";
+		}
+		if(Number == 2) {
+			System.out.println("Tôi chọn Bao");
+			second = "bao";
+		}
+		
+		
+		if(first.equals(second)) System.out.println("Hòa rồi nhé Bae :))))");
+		
+		if(first.equals("kéo")) {
+			if(second == "búa") {
+				System.out.println("Bạn thua rồi nhé, xin 1 shot =]>");
+				machine++;
+			}
+			if(second == "bao") {
+				System.out.println("Ôi tôi thua rồi, nhường bạn 1 điểm đấy :)");
+				people++;
+			}
+		} else if(first.equals("búa")) {
+			if(second == "kéo") {
+				System.out.println("Ôi tôi thua rồi, nhường bạn 1 điểm đấy :)");
+				people++;
+			}
+			if(second == "bao") {
+				System.out.println("Bạn thua rồi nhé, xin 1 shot =]>");
+				machine++;
+			}
+		}
+		else if(first.equals("bao")) {
+			if(second == "búa") {
+				System.out.println("Ôi tôi thua rồi, nhường bạn 1 điểm đấy :)");
+				people++;
+			}
+			if(second == "kéo") {
+				System.out.println("Bạn thua rồi nhé, xin 1 shot =]>");
+				machine++;
+			}
+		}
+		System.out.println("Điểm của bạn là:" + people + " Điểm của tôi là:" + machine);
+		
+		System.out.println("Bạn có muốn chơi tiếp không?"
+				+ " Nhấn 0 để dừng lại hoặc số bất kỳ để tiếp tục");
+			
+			third = sc.nextInt();
+		}while(third != 0);
+		
+		System.out.println("GameOver!!");
+		System.out.println("Tổng tỉ số là: " + people +" điểm cho bạn và: " + machine + " cho tôi!!!");
+		if(people > machine) {
+			System.out.println("Chúc mừng bạn đã thắng. Hôm nay bạn may mắn đấy, lần sau chơi tiếp nhé!!!");
+		}
+		else if(people < machine) {
+			System.out.println("Bạn tuổi nhoằn, tôi đùa đấy hihi, lần sau gỡ lại nhé!!!");
+		}
+		else {
+			System.out.println("Bất phân thắng bại!! Chơi hay lắm, lần sau chiến tiếp hê hê!!!");
+		}
+	}
+
+}

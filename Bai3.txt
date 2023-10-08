@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Bai3 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Nhập số bạn muốn tìm: ");
+		int input = sc.nextInt();
+		while(input <= 0)	{	
+		System.out.println("số bạn nhập không hợp lệ vui lòng nhập lại: ");
+		input = sc.nextInt();
+		}
+		
+		int tong = 0;
+		for (int i = 1; i <= input; i++) {
+			tong += i;
+			if(i%2==0) tong-=i;
+		}
+		System.out.println("Tổng các số lẻ nguyên dương là:" + tong );
+		
+	}
+
+}

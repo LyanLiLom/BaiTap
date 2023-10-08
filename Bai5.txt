@@ -1,0 +1,34 @@
+import java.util.Scanner;
+
+public class Bai5 {
+
+	public static void main(String[] args) {
+		double money,future;
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Vui lòng nhập số tiền bạn muốn gửi: ");
+		money = sc.nextDouble();
+		System.out.print("Số tiền bạn muốn có trong tương lai là: ");
+		future = sc.nextDouble();
+		while(money > future) {
+			System.out.print("Sô tiền bạn muốn có trong tương lai phải lớn hơn số tiền gửi,"
+					+ " vui lòng nhập lại: ");
+			future = sc.nextDouble();
+		}
+		
+		int mouth = 0;
+		int year = 0;
+		double a = money;
+		System.out.println("Lãi suất hiện tại năm 2023 là 0,5% 1 tháng và 6% 1 năm!!!");
+				
+		while(money < future) {
+			money += a*0.5/100;
+			mouth++;
+			if(mouth == 12) {
+			year++;
+			mouth -= 12;
+			}
+		}
+		System.out.println("Với " + a + "VNĐ thì bạn phải mất " + mouth + " tháng " + year + " năm để có "+ future);
+	}
+
+}
