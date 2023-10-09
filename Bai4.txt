@@ -14,9 +14,14 @@ public class Bai4 {
 		
 		int tong = 0;
 		for(int i=1; i <= input2; i++) {
-			sum = sum*input1;
+			sum = Tich(sum,input1);
 			tong = tong + sum;
 		}
 		System.out.println("Tổng là: " + tong);
+	}
+	
+	public static int Tich(int a, int b) {
+		int kq;
+		return kq = a*b;
 	}
 }

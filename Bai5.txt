@@ -21,14 +21,14 @@ public class Bai5 {
 		System.out.println("Lãi suất hiện tại năm 2023 là 0,5% 1 tháng và 6% 1 năm!!!");
 				
 		while(money < future) {
-			money += a*0.5/100;
+			money += money*0.5/100;
 			mouth++;
 			if(mouth == 12) {
 			year++;
 			mouth -= 12;
 			}
 		}
-		System.out.println("Với " + a + "VNĐ thì bạn phải mất " + mouth + " tháng " + year + " năm để có "+ future);
+		System.out.println("Với " + a + "VNĐ thì bạn phải mất " + mouth + " tháng " + year + " năm để có "+ money);
 	}
 
 }
