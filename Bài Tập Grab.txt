@@ -1,0 +1,60 @@
+import java.util.Scanner;
+
+public class Grab {
+
+	public static void main(String[] args) {
+		int loai = 0;
+		Scanner sc = new Scanner(System.in);
+		
+		do {
+		System.out.println("Nhập loại xe(Car, Suv, Black): ");
+		String xe = sc.nextLine();
+		if(xe.compareToIgnoreCase("car") == 0) loai = 1;
+		if(xe.compareToIgnoreCase("suv") == 0) loai = 2;
+		if(xe.compareToIgnoreCase("black") == 0) loai = 3;	
+		if(loai == 0) {
+			System.out.println("Loại xe không hợp lệ vui lòng nhập lại");
+		}
+		}while(loai == 0);
+		
+		System.out.println("Số KM đi được: ");
+		double km = sc.nextDouble();
+		System.out.println("Thời gian chờ: ");
+		int time =sc.nextInt();
+			
+		switch(loai) {
+		case 1: 
+			System.out.println("Xe bạn chọn là Car!!");
+			System.out.print("Với " + km + " km và thời gian chờ là " + time + " thì bạn phải trả:");
+			System.out.println(first(km,time,8000,7500,7000,2000) + second(km,time,8000,7500,7000,2000) + third(km,time,8000,7500,7000,2000) + "VNĐ");
+			break;
+		case 2:
+			System.out.println("Xe bạn chọn là Suv!!");
+			System.out.print("Với " + km + " km và thời gian chờ là " + time + " thì bạn phải trả:");
+			System.out.println(first(km,time,9000,8500,8000,3000) + second(km,time,9000,8500,8000,3000) + third(km,time,9000,8500,8000,3000) + "VNĐ");
+			break;
+		case 3:
+			System.out.println("Xe bạn chọn là Black!!");
+			System.out.print("Với " + km + " km và thời gian chờ là " + time + " thì bạn phải trả:");
+			System.out.println(first(km,time,10000,9500,9000,3500) + second(km,time,10000,9500,9000,3500) + third(km,time,10000,9500,9000,3500) + "VNĐ");
+			break;
+		}
+	}
+	
+	public static double first(double km, int time, int a, int b, int c, int d) {
+		if (km <= 1 && km >0) {
+		return km*a + time/3*d;
+		} else return 0;
+	}
+	public static double second(double km, int time, int a, int b, int c, int d) {
+		if (km <= 19 && km > 1) {
+		return (km - 1)*b + a + time/3*d;
+		} else return 0;
+	}
+	public static double third(double km, int time, int a, int b, int c, int d) {
+		if (km > 19) {
+		return (km - 19)*c + 18*b + a + time/3*d;
+		} else return 0;
+	}
+	
+}
