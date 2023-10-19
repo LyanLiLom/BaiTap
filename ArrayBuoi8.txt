@@ -1,0 +1,211 @@
+import java.util.Scanner;
+
+public class Array {
+
+	public static void main(String[] args) {
+			Scanner sc = new Scanner(System.in);
+			int n;
+			do {
+			System.out.println("Vui lòng nhập số phần tử mảng(ít nhất = 1): ");
+			n = sc.nextInt();
+			}while(n < 1);
+			
+			int [] mang = new int[n];
+			nhapMang(mang);
+			int nhap;
+			do {
+			System.out.println("1.Tính tổng các số dương.");
+			System.out.println("2.Tính tổng các số lẻ.");
+			System.out.println("3.Đếm có bao nhiêu số dương.");
+			System.out.println("4.Tìm số nhỏ nhất trong mảng.");
+			System.out.println("5.Tìm số dương nhỏ nhất trong mảng.");
+			System.out.println("6.Tìm số chẵn cuối cùng trong mảng.");
+			System.out.println("7.Tìm số chẵn đầu tiên trong mảng.");
+			System.out.println("8.Tìm số nguyên tố đầu tiên trong mảng.");
+			System.out.println("9.Tìm số dương cuối cùng trong mảng số nguyên.");
+			System.out.println("10.Tìm số chẵn nhỏ nhất trong mảng số nguyên.");
+			System.out.print("Vui lòng nhập chức năng bạn muốn(1->10):");
+			nhap = sc.nextInt();
+			
+			if(nhap > 10 || nhap < 1) {
+				System.out.println("Chức năng bạn nhập không hợp lệ vui lòng nhập lại:");
+				System.out.println("=================================================");
+			}
+			}while(nhap > 10 || nhap < 1);
+			
+			switch (nhap){
+			case 1: tinhTongDuong(mang);break;
+			case 2: tinhTongSoLe(mang);break;
+			case 3: demSoDuong(mang);break;
+			case 4: soNhoNhatTrongMang(mang);break;
+			case 5: soDuongNhoNhatTrongMang(mang);break;
+			case 6: soChanCuoiCung(mang);break;
+			case 7: soChanDauTien(mang);break;
+			case 8: soNguyenToDauTien(mang);break;
+			case 9: soDuongCuoiCung(mang);break;
+			case 10: soChanNhoNhat(mang);break;
+			}
+		}
+	
+		public static void nhapMang(int[] mang) {
+			Scanner sc = new Scanner(System.in);
+			for(int i = 0; i <mang.length; i++) {
+			System.out.print("Vui lòng nhập phần tử thứ " + i +": ");
+			mang[i] = sc.nextInt();
+			}
+		}
+		
+		public static void tinhTongDuong(int[] mang) {
+			boolean flag = false;
+			int tong = 0;
+			for(int i = 0; i < mang.length; i++) {
+			if(mang[i] > 0) {
+				tong += mang[i];
+				flag = true;
+			}
+			}
+			if(flag = true) {
+				System.out.println("Tổng các số dương là: " + tong);
+			}else {
+				System.out.println("Mảng không có số dương!!!");
+			}
+		}
+		
+		public static void tinhTongSoLe(int[] mang) {
+			boolean flag = false;
+			int tong = 0;
+			for(int i = 0; i < mang.length; i++) {
+			if(mang[i] % 2 != 0) {
+				tong += mang[i];
+				flag = true;
+			}
+			}
+			if(flag = true) {
+				System.out.println("Tổng các số lẻ là: " + tong);
+			}else System.out.println("Mảng không có số lẻ!!!");
+		}
+		
+		public static void demSoDuong(int[] mang) {
+			boolean flag = false;
+			int count = 0;
+			
+			for(int i = 0; i < mang.length; i++) {
+				if(mang[i] > 0) {
+					count++;
+					flag = true;
+				}
+			}
+			if(flag = true) {
+				System.out.println("Số số dương có trong mảng là: " + count);
+			}else System.out.println("Mảng không có số dương");
+		}
+		
+		public static void soNhoNhatTrongMang(int[] mang) {
+			
+			int min = Integer.MAX_VALUE;
+			for(int i = 0; i < mang.length; i++) {
+				if(mang[i] <  min) {
+					min = mang[i];
+				}
+			}
+			System.out.println("Số bé nhất trong mảng là: " + min);
+		}
+		
+		public static void soDuongNhoNhatTrongMang(int[] mang) {
+			boolean flag = false;
+			int min = Integer.MAX_VALUE;
+			for(int i = 0; i < mang.length; i++) {
+				if(mang[i] <  min && mang[i] > 0) {
+					min = mang[i];
+					flag = true;
+				}
+			}
+			
+			if(flag = true) {
+			System.out.println("Số dương bé nhất trong mảng là: " + min);
+			}else System.out.println("Không có số dương trong mảng!!!");
+		}
+		
+		public static void soChanCuoiCung(int[] mang) {
+			boolean flag = false;
+			for(int i = mang.length - 1; i >= 0; i--) {
+				if(mang[i] % 2 == 0) {
+					flag = true;
+					System.out.println("Số chẵn  cuối cùng trong mảng là: " + mang[i] + " đứng ở vị trí thứ " + i);
+					break;
+				}
+			}
+			if(flag == false)System.out.println(-1);
+		}
+		
+		public static void soChanDauTien(int[] mang) {
+			boolean flag = false;
+			for(int i = 0; i < mang.length; i++) {
+				if(mang[i] % 2 == 0) {
+					flag = true;
+					System.out.println("Số chẵn đầu tiên trong mảng là: " + mang[i] + " đứng ở vị trí thứ " + i);
+					break;
+				}
+			}
+			if(flag == false)System.out.println(-1);
+		}
+		
+		public static void soNguyenToDauTien(int[] mang) {
+			boolean flag = false;
+			int count = 0;
+			for(int i = 0; i < mang.length; i++) {
+				if(mang[i] >= 2) {
+					for(int j = 2; j <= mang[i]; j++) {
+						if(mang[i] % j == 0) {
+							count++; 							
+						}
+					}
+					if(count != 1) count = 0 ;
+					
+					if(count == 1) {
+						System.out.println("Số nguyên tố đầu tiên trong mảng là: " + mang[i] + " đứng ở vị trí thứ " + i);
+						flag = true;
+						break;	
+					}
+				}
+			}
+			if(flag == false)System.out.println(-1);
+		}
+		
+		public static void soDuongCuoiCung(int[] mang) {
+			boolean flag = false;
+			for(int i = mang.length - 1; i >= 0; i--) {
+				if(mang[i] > 0) {
+					flag = true;
+					System.out.println("Số dương cuối cùng trong mảng là: " + mang[i] + " đứng ở vị trí thứ " + i);
+					break;
+				}
+			}
+			if(flag == false)System.out.println(-1);
+		}
+		
+		public static void soChanNhoNhat(int[] mang) {
+			int flag = 0; 
+			int min = Integer.MAX_VALUE;
+			int index = -1;
+			for(int i = 0; i < mang.length; i++) {
+				if(mang[i] < min && mang[i] % 2 == 0) {
+					min = mang[i];
+					index = i;
+					flag++;
+					break;
+				}
+			}
+			if(flag == 0) {
+				System.out.println(-1);
+			} else {
+				for(int i = index + 1; i < mang.length; i++) {
+					if(mang[i] < min && mang[i] % 2 == 0) {
+						min = mang[i];
+					}
+					
+				}
+				System.out.println("Số chẵn nhỏ nhất là: " + min);
+			}
+		}
+}
