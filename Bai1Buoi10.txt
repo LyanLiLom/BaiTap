@@ -1,0 +1,51 @@
+public class Bai1 {
+	private double a,b,c;
+	
+	public Bai1() {
+	}
+	
+	public Bai1(double a, double b, double c) {
+		this.a = a;
+		this.b = b;
+		this.c = c;
+	}
+
+	public double getA() {
+		return a;
+	}
+
+	public void setA(double a) {
+		this.a = a;
+	}
+
+	public double getB() {
+		return b;
+	}
+
+	public void setB(double b) {
+		this.b = b;
+	}
+
+	public double getC() {
+		return c;
+	}
+
+	public void setC(double c) {
+		this.c = c;
+	}
+	
+	public double tinhDelta() {
+		return b*b -4*a*c;
+	}
+	
+	public void tinhNghiemPhuongTrinh() {
+		if(tinhDelta() > 0) {
+			System.out.println("Phương trình có 2 nghiệm là: ");
+			System.out.println("x1 = " + (-b + Math.sqrt(tinhDelta())/2*a ));
+			System.out.println("x2 = " + (-b - Math.sqrt(tinhDelta())/2*a ));
+		}else if(tinhDelta() == 0) {
+			System.out.println("Phương trình có nghiệm kép là: ");
+			System.out.println("x1 = x2 = " + -b/(2*a));
+		}else System.out.println("Phương Trình Vô Nghiệm!!!");
+	}
+}

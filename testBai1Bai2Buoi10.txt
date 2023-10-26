@@ -1,0 +1,43 @@
+import java.util.Scanner;
+
+public class test {
+
+	public static void main(String[] args) {
+		
+		//Test bài 1
+//		Bai1 bai1 = new Bai1(1,-4,4);
+//		Bai1 bai2 = new Bai1(1,-2,2);
+//		Bai1 bai3 = new Bai1();
+//		bai3.setA(1);
+//		bai3.setB(2);
+//		bai3.setC(-2);
+//		System.out.println(bai1.tinhDelta());
+//		bai1.tinhNghiemPhuongTrinh();
+//		bai2.tinhNghiemPhuongTrinh();
+//		bai3.tinhNghiemPhuongTrinh();
+		
+		
+		//Test bài 3
+		Scanner sc = new Scanner(System.in);
+
+		Bai3 test1 = new Bai3(202,"Đặng Kiều Vỹ",10,10);
+		Bai3 test2 = new Bai3(113,"Lại Trọng Gia Huy",5,6);
+		Bai3 test3 = new Bai3();
+		System.out.println("Vui lòng nhập mã số Sinh viên: ");
+		test3.setMaSV(sc.nextInt());
+		System.out.println("Nhập họ tên học sinh: " + sc.nextLine());
+		test3.setHoTen(sc.nextLine());
+		System.out.println("Vui lòng nhập điểm lý thuyết(0->10): ");
+		test3.setDiemLT(sc.nextFloat());
+		System.out.println("Vui lòng nhập điểm thực hành(0->10): ");
+		test3.setDiemTH(sc.nextFloat());
+		System.out.println(test1);
+		System.out.println(test2);
+		System.out.println(test3);
+		
+		System.out.println("Điểm trung bình MS:" + test1.getMaSV() + "là: " +test1.tinhDTB());
+		System.out.println("Điểm trung bình MS:" + test2.getMaSV() + "là: " +test2.tinhDTB());
+		System.out.println("Điểm trung bình MS:" + test3.getMaSV() + "là: " +test3.tinhDTB());
+	}
+
+}

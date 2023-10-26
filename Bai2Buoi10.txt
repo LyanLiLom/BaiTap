@@ -1,0 +1,57 @@
+public class Bai3 {
+	private int maSV;
+	private String hoTen;
+	private float diemTH,diemLT;
+	
+	public Bai3() {
+
+	}
+	
+	public Bai3(int maSV, String hoTen, float diemTH, float diemLT) {
+		this.maSV = maSV;
+		this.hoTen = hoTen;
+		this.diemTH = diemTH;
+		this.diemLT = diemLT;
+	}
+
+	public int getMaSV() {
+		return maSV;
+	}
+
+	public void setMaSV(int maSV) {
+		this.maSV = maSV;
+	}
+
+	public String getHoTen() {
+		return hoTen;
+	}
+
+	public void setHoTen(String hoTen) {
+		this.hoTen = hoTen;
+	}
+
+	public float getDiemTH() {
+		return diemTH;
+	}
+
+	public void setDiemTH(float diemTH) {
+		this.diemTH = diemTH;
+	}
+
+	public float getDiemLT() {
+		return diemLT;
+	}
+
+	public void setDiemLT(float diemLT) {
+		this.diemLT = diemLT;
+	}
+	
+	public double tinhDTB() {
+		return (diemLT + diemTH)/2;
+	}
+	
+	@Override
+	public String toString() {
+		return "Mã sinh viên: " + maSV + " Họ tên: " + hoTen +" với điểm thực hành là " + diemTH + " và điểm lý thuyết là " + diemLT;
+	}
+}

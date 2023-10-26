@@ -1,0 +1,120 @@
+import java.util.Scanner;
+
+public class testBai4 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		Bai4 b[] = null;
+		int a,n = 0;
+		long d,e,f,g;
+		
+		do {
+		System.out.println("Vui lòng nhập chức năng bạn muốn:(1 --> 6, nhập số khác thoát!!)");
+		System.out.println("1. Tạo tài khoản!");
+		System.out.println("2. Xem thông tin tất cả các tài khoản!");
+		System.out.println("3. Nạp tiền vào tài khoản!");
+		System.out.println("4. Rút tiền!");
+		System.out.println("5. Đáo hạn!");
+		System.out.println("6. Chuyển tiền!");		
+		a = sc.nextInt();
+		
+		switch (a) {		
+			case 1: {				
+				System.out.println("Vui lòng nhập số tài khoản bạn muốn tạo:");
+				n = sc.nextInt();
+				Bai4 c = new Bai4();
+				b = new Bai4[n];
+				for(int i = 0; i < n; i++) {
+					System.out.println("Tài khoản số " + (i+1));					
+					b[i] = new Bai4();
+					c.taoTK(b[i]);
+				}
+			}break;
+			
+			case 2: {
+				System.out.printf("%-10s %-20s %-20s\n", "Số TK", "Tên TK", "Số tiền trong TK");
+                for (int i = 0; i < n; i++) {
+                    b[i].inTK();
+                }
+                break;
+			}
+			
+			case 3:
+				boolean flag = false;
+				System.out.println("Nhập số tài khoản khách hàng cần nạp tiền: ");
+                d = sc.nextLong();
+                for (int i = 0; i < n; i++) {
+                    e = b[i].getSoTK();
+                    if (e == d) {
+                        System.out.println("Bạn chọn tài khoản: " + d);
+                        b[i].napTien();
+                        flag = true;
+                    }
+                }
+                if(flag == false) System.out.println("Tài khoản không tồn tại!!!");
+                break;
+                
+			case 4:
+				System.out.println("Nhập số tài khoản cần rút tiền: ");
+                d = sc.nextLong();
+                for (int i = 0; i < n; i++) {
+                    f = b[i].getSoTK();
+                    if (f == d) {
+                        System.out.println("Bạn chọn tài khoản: " + d);
+                        b[i].rutTien();
+                    }
+                }
+                break;
+                
+			case 5:
+				boolean flag1 = false;
+				System.out.println("Nhập số tài khoản khách hàng cần đáo hạn: ");
+                d = sc.nextLong();
+                for (int i = 0; i < n; i++) {
+                    e = b[i].getSoTK();
+                    if (d == e) {
+                        System.out.println("Bạn chọn tài khoản: " + d);
+                        b[i].daoHan();
+                        flag1 = true;
+                    }
+                }
+                if (flag1 == false) System.out.println("Tài khoản không tồn tại!!!");
+                break;
+                
+			case 6:
+				double tkChuyen,tkNhan,tienChuyen;
+				
+				System.out.print("Nhập số tài khoản khách hàng chuyển tiền: ");
+				d = sc.nextLong();
+				System.out.print("Nhập số tài khoản khách hàng nhận tiền: ");
+				e = sc.nextLong();
+				for(int i = 0; i < n ; i++) {
+					f = b[i].getSoTK();
+					if(d == f) {
+						tkChuyen = b[i].getsoTienTrongTK();
+						for(int j = 0; j < n; j++) {
+							g = b[j].getSoTK();
+							if(e == g) {
+								tkNhan = b[j].getsoTienTrongTK();
+								System.out.println("Nhập số tiền cẩn chuyển: ");
+								tienChuyen = sc.nextDouble();
+								if (tienChuyen <= tkChuyen) {
+	                                tkChuyen -= tienChuyen;
+	                                tkNhan += tienChuyen;
+	                                b[i].setsoTienTrongTK(tkChuyen);
+	                                b[j].setsoTienTrongTK(tkNhan);
+	                                System.out.println("Tài khoản số " + f + " vừa chuyển: " + tienChuyen);
+                                    System.out.println("Tài khoản số " + g + " vừa nhận: " + tienChuyen);
+							}else System.out.println("Số tiền không hợp lệ!!!");
+						}else System.out.println("Số tài khoản người nhận không hợp lệ!!!");
+						}
+					}else System.out.println("Số tài khoản người chuyển không hợp lệ!!!");
+				}
+				break;
+		}
+		
+		}while(a > 0 || a <= 6);
+					
+	}
+}
