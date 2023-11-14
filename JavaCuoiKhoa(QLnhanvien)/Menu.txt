@@ -1,0 +1,160 @@
+package BTbuoi11;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Menu {
+
+	public static void main(String[] args) {
+		int a;
+		Scanner sc = new Scanner(System.in);
+		CongTy ct = new CongTy();
+		ct.setDsNhanVien(taoDuLieu());
+		
+		do {
+		System.out.println("Vui lòng nhập chức năng bạn muốn:");
+		System.out.println("1. Nhập thông tin công ty. ");
+		System.out.println("2. Thêm, xóa thông tin 1 nhân sự.");
+		System.out.println("3. Phân bổ Nhân viên vào Trưởng phòng.");
+		System.out.println("4. Xuất ra thông tin toàn bộ nguời trong công ty.");
+		System.out.println("5. Tính và xuất tổng lương cho toàn công ty.");
+		System.out.println("6. Tìm Nhân viên thường có lương cao nhất.");
+		System.out.println("7. Tìm Trưởng phòng có lượng nhân viên dưới quyền nhiều nhât");
+		System.out.println("8. Sắp xếp nhân viên toàn công ty theo thứ tự abc.");
+		System.out.println("9. Sắp xếp nhân viên toàn công ty theo thứ tự lương giảm dần.");
+		System.out.println("10.Tìm giám đốc cố số lượng cổ phần nhiều nhất.");
+		System.out.println("11.Tính và xuất tổng Thu Nhập của từng giám đốc.");
+		a = sc.nextInt();
+		if(a < 1 || a > 11) {
+			System.out.println("-------------------------------------------------");
+			System.out.println("Chức năng bạn nhập không hợp lệ vui lòng nhập lại");
+		}
+		
+		switch(a) {
+		case 1: 
+			ct.NhapThongTinCongTy();
+			ct.XuatThongTinCongTy();
+			break;
+			
+		case 2:{
+			System.out.println("Bạn muốn thêm hay muốn xóa nhân sự:");
+			System.out.println("1.Thêm.");
+			System.out.println("2.Xóa");
+			int b = sc.nextInt();
+			while(b != 1 && b != 2) {
+				System.out.println("Lựa chọn bạn nhập không khả dụng. Vui lòng nhập lại: ");
+				b = sc.nextInt();
+			}
+			if(b == 1) ct.ThemMotNhanSu();
+			if(b == 2) ct.XoaNhanSu();
+		}break;	
+		
+		case 3:
+			System.out.println("Phân bổ nhân viên vào trưởng phòng.");
+            ct.PhanBoNhanVienVaoTruongPhong();
+			break;
+		
+		case 4:
+			System.out.println("Xuất thông tin toàn bộ nhân sự trong công ty.");
+			ct.XuatThongTinToanNhanVien();
+			break;
+		
+		case 5:
+			System.out.println("Tính tổng lương của toàn công ty.");
+			ct.TongLuongToanCongTy();
+			break;
+			
+		case 6:
+			System.out.println("Tìm nhân viên thường có lương cao nhất.");
+			ct.NhanVienThuongCoLuongCaoNhat();
+			break;
+		case 7:
+			System.out.println("Tìm trưởng phòng có nhân viên dưới quyền nhiều nhất.");
+			ct.TruongPhongCoNhieuNhanVienNhat();
+			break;
+		case 8:
+			System.out.println("Sắp xếp nhân viên theo thứ tự A -> Z.");
+			ct.SapXepNhanVienTheoTen();
+			break;
+		case 9:
+			System.out.println("Sắp xếp nhân viên giảm dần theo lương.");
+			ct.SapXeoNhanVienGiamDanTheoLuong();
+			break;
+		case 10:
+			System.out.println("Tìm giám đốc có cổ phần nhiều nhất.");
+			ct.GiamDocCoCPNhieuNhat();
+			break;
+		case 11:
+			System.out.println("Tính tổng thu nhập của từng giám đốc.");
+			ct.TongThuNhapTungGiamDoc();
+			break;
+		}
+		
+	}while(a >= 1 || a <= 11);
+	
+	}
+	
+	public static ArrayList<QuanLyNhanSu> taoDuLieu() {
+        ArrayList<QuanLyNhanSu> duLieu = new ArrayList<>();
+
+        QuanLyNhanSu nv1 = new NhanVien();
+        nv1.setMaNV("nv000001");
+        nv1.setHoTenNV("Nguyen Van Khang");
+        nv1.setSoDTNV("0325478165");
+        nv1.setSoNgayLamViec(23);
+
+        duLieu.add(nv1);
+
+        QuanLyNhanSu nv2 = new NhanVien();
+        nv2.setMaNV("nv000002");
+        nv2.setHoTenNV("Hoang Thi Loan");
+        nv2.setSoDTNV("0325478456");
+        nv2.setSoNgayLamViec(20);
+
+        duLieu.add(nv2);
+
+        QuanLyNhanSu nv3 = new TruongPhong();
+        nv3.setMaNV("nv000003");
+        nv3.setHoTenNV("Le Van Bo");
+        nv3.setSoDTNV("0325478456");
+        nv3.setSoNgayLamViec(25);
+
+        duLieu.add(nv3);
+
+        QuanLyNhanSu nv4 = new GiamDoc();
+        nv4.setMaNV("nv000004");
+        nv4.setHoTenNV("Le Hoang Dieu");
+        nv4.setSoDTNV("0325478456");
+        nv4.setSoNgayLamViec(12);
+        ((GiamDoc)nv4).setPhanTramCoPhan(20);
+
+        duLieu.add(nv4);
+
+        QuanLyNhanSu nv5 = new NhanVien();
+        nv5.setMaNV("nv000005");
+        nv5.setHoTenNV("Nguyen Van Minh");
+        nv5.setSoDTNV("0325408165");
+        nv5.setSoNgayLamViec(23);
+
+        duLieu.add(nv5);
+
+        QuanLyNhanSu nv6 = new TruongPhong();
+        nv6.setMaNV("nv000006");
+        nv6.setHoTenNV("Le Van An");
+        nv6.setSoDTNV("0325478456");
+        nv6.setSoNgayLamViec(23);
+
+        duLieu.add(nv6);
+
+        QuanLyNhanSu nv7 = new GiamDoc();
+        nv7.setMaNV("nv000007");
+        nv7.setHoTenNV("Bui Viet Phuc");
+        nv7.setSoDTNV("0325478456");
+        nv7.setSoNgayLamViec(20);
+        ((GiamDoc)nv7).setPhanTramCoPhan(40);
+
+        duLieu.add(nv7);
+
+        return duLieu;
+    }
+}

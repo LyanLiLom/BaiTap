@@ -1,0 +1,39 @@
+package BTbuoi11;
+
+import java.util.Scanner;
+
+public class GiamDoc extends QuanLyNhanSu {
+		Scanner sc = new Scanner(System.in);
+		
+		private float phanTramCoPhan;
+		
+		public GiamDoc() {
+	        super();
+	        setLuong1Ngay(300);
+	    }
+		
+		private void NhapPhanTramCoPhieu() {
+			System.out.println("Vui lòng nhập phần trăm cổ phiếu:");
+			float ptCoPhieu = sc.nextFloat();
+			while (ptCoPhieu < 0 || ptCoPhieu > 100) {
+				System.out.println("Phần trăm cổ phiếu không hợp lệ(0 < cổ phiếu < 100).Vui lòng nhập lại:");
+				ptCoPhieu = sc.nextFloat();
+			}
+		}
+		
+		@Override
+	    public void NhapThongTinNhanVien() {
+	        super.NhapThongTinNhanVien();
+	        NhapPhanTramCoPhieu();
+	        TinhLuong();
+	    }
+
+		public float getPhanTramCoPhan() {
+			return phanTramCoPhan;
+		}
+
+		public void setPhanTramCoPhan(float phanTramCoPhan) {
+			this.phanTramCoPhan = phanTramCoPhan;
+		}
+		
+}

@@ -1,0 +1,53 @@
+package BTbuoi11;
+
+import java.util.ArrayList;
+
+public class TruongPhong extends QuanLyNhanSu {
+
+		int soLuongNV = 0;
+		private ArrayList<NhanVien> danhSachNhanVien;
+		
+		public TruongPhong() {
+	        danhSachNhanVien = new ArrayList<>();
+	        setLuong1Ngay(200);
+	    }
+		
+		@Override
+		 public void NhapThongTinNhanVien() {
+	        super.NhapThongTinNhanVien();
+	        TinhLuong();
+	    }
+		
+		 @Override
+		 protected double TinhLuong() {
+		     return super.TinhLuong() + 100 * danhSachNhanVien.size();
+		 }
+		 
+		 public void TiepNhanNhanVien(NhanVien nv) {
+		     danhSachNhanVien.add(nv);
+		     setSoLuongNV(getDanhSachNhanVien().size());
+		 }
+
+		 public void LoaiBoNhanVien(NhanVien nv) {
+		     danhSachNhanVien.remove(nv);
+		     setSoLuongNV(getDanhSachNhanVien().size());
+		 }
+
+		public ArrayList<NhanVien> getDanhSachNhanVien() {
+			return danhSachNhanVien;
+		}
+
+		public void setDanhSachNhanVien(ArrayList<NhanVien> danhSachNhanVien) {
+			this.danhSachNhanVien = danhSachNhanVien;
+		}
+
+		public int getSoLuongNV() {
+			return soLuongNV;
+		}
+
+		public void setSoLuongNV(int soLuongNV) {
+			this.soLuongNV = soLuongNV;
+		}
+		 
+		 
+}

@@ -1,0 +1,324 @@
+package BTbuoi11;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
+public class CongTy {
+		Scanner sc = new Scanner(System.in);
+		
+		private String tenCTy;
+		private String MSThue;
+		private double doanhThuThang = 100000;
+		private List<QuanLyNhanSu> dsNhanVien;
+		
+		public CongTy() {
+			dsNhanVien = new ArrayList<>();
+		}
+
+		private void NhapTenCongTy() {
+	        System.out.println("Nhập tên công ty: ");
+	        String tenCT = sc.nextLine();
+	        while(tenCT.isEmpty()) {
+	        	System.out.println("Tên công ty đang để trống, vui lòng nhập lại:");
+	        	tenCT = sc.nextLine();
+	        }	        	
+	        setTenCTy(tenCT);
+	    }
+		
+		private void NhapMaSoThue() {
+	        System.out.println("Nhập mã số thuế(8 ký tự): ");
+	        String maSoThue  = sc.nextLine(); 
+	        while(maSoThue.length() != 8)
+	        {
+	        	System.out.println("Mã số thuế chưa đúng 8 ký tự. Vui lòng nhập lại: ");
+	        	maSoThue = sc.nextLine();
+	        }
+	        setMSThue(maSoThue);
+	    }
+		
+		private void NhapDoanhThuThang() {
+	        System.out.println("Nhập doanh thu tháng: ");
+	        double doanhThuThang = sc.nextDouble();
+	        while(doanhThuThang < 0) {
+	        	System.out.println("Doanh thu tháng không được âm. Vui lòng nhập lại: ");
+	        	doanhThuThang = sc.nextDouble();
+	        }
+	        	
+	        setDoanhThuThang(doanhThuThang);
+	    }
+		
+		public void NhapThongTinCongTy() {
+	        NhapTenCongTy();
+	        NhapMaSoThue();
+	        NhapDoanhThuThang();
+	    }
+		
+		public void XuatThongTinCongTy() {
+	        System.out.printf("%-20s | %-20s | %-20s\n", "Tên công ty", "Mã số thuế", "Doanh thu tháng");
+	        System.out.printf("%-20s | %-20s | %-20.2f", tenCTy, MSThue, doanhThuThang);
+	    }
+		
+		public void ThemMotNhanSu() {
+	        QuanLyNhanSu nvThem;
+	        int luaChon;
+		        System.out.println("Nhập nhân viên muốn thêm:");
+		        System.out.println("1. Nhân viên.");
+		        System.out.println("2. Trưởng phòng.");
+		        System.out.println("3. Giám đốc");
+		        System.out.println("Nhập lựa chọn: ");
+	            luaChon = sc.nextInt();
+	            switch (luaChon) {
+	                case 1:
+	                    nvThem = new NhanVien();
+	                    ((NhanVien)nvThem).NhapThongTinNhanVien();
+	                    if(KiemTraNhanVienTonTai(nvThem))
+	                        System.out.println("Nhân viên có mã " + nvThem.getMaNV() + " đã tồn tại.");
+	                    else
+	                        dsNhanVien.add(nvThem);
+	                    	((NhanVien) nvThem).setMaTruongPhong(null);
+	                    break;
+	                case 2:
+	                    nvThem = new TruongPhong();
+	                    ((TruongPhong)nvThem).NhapThongTinNhanVien();
+	                    if(KiemTraNhanVienTonTai(nvThem))
+	                        System.out.println("Nhân viên có mã " + nvThem.getMaNV() + " đã tồn tại.");
+	                    else
+	                        dsNhanVien.add(nvThem);
+	                    break;
+	                case 3:
+	                    nvThem = new GiamDoc();
+	                    ((GiamDoc)nvThem).NhapThongTinNhanVien();
+	                    if(KiemTraNhanVienTonTai(nvThem))
+	                        System.out.println("Nhân viên có mã " + nvThem.getMaNV() + " đã tồn tại.");
+	                    else
+	                        dsNhanVien.add(nvThem);
+	                    break;
+	                default:
+	                    System.out.println("Loại nhân viên không đúng.");
+	                    break;
+	            }
+	    }
+		
+		private boolean KiemTraNhanVienTonTai(QuanLyNhanSu nvKT) {
+	        for (QuanLyNhanSu nv: dsNhanVien)
+	            if(nv.getMaNV().equalsIgnoreCase(nvKT.getMaNV()))
+	                return true;
+	        return false;
+	    }
+		
+		
+		 public void XoaNhanSu() {
+		        System.out.println("Nhập mã số nhân sự muốn xóa:");
+		        String maSoXoa = sc.nextLine();
+		        QuanLyNhanSu nvXoa = TimNhanVienTheoMa(maSoXoa);
+		        if(nvXoa == null) {
+		            System.out.println("Không tồn tại nhân sự có mã " + maSoXoa);
+		        } else {
+		            if(nvXoa instanceof TruongPhong) {
+		                XoaTruongPhong((TruongPhong) nvXoa);
+		            } else if (nvXoa instanceof NhanVien) {
+		                XoaNhanVienThuong((NhanVien) nvXoa);
+		            } else {
+		                XoaGiamDoc((GiamDoc) nvXoa);
+		            }
+		        }
+		    }
+		
+		private QuanLyNhanSu TimNhanVienTheoMa(String maNV) {
+		     for (QuanLyNhanSu nv: dsNhanVien)
+		         if(nv.getMaNV().equalsIgnoreCase(maNV))
+		            return nv;
+		     return null;
+		}
+		 
+		private QuanLyNhanSu TimNVThuongTheoMa(String maNV) {
+	        for (QuanLyNhanSu nv: dsNhanVien)
+	            if(nv instanceof NhanVien && nv.getMaNV().equalsIgnoreCase(maNV))
+	                return nv;
+	        return null;
+	    }
+
+	    private QuanLyNhanSu TimTruongPhongTheoMa(String maNV) {
+	        for (QuanLyNhanSu nv: dsNhanVien)
+	            if(nv instanceof TruongPhong && nv.getMaNV().equalsIgnoreCase(maNV))
+	                return nv;
+	        return null;
+	    }
+	    
+	    private void XoaTruongPhong(TruongPhong truongPhong) {
+            for (QuanLyNhanSu nv: dsNhanVien)
+                if(nv instanceof NhanVien && ((NhanVien) nv).getMaTruongPhong() != null && ((NhanVien) nv).getMaTruongPhong().equalsIgnoreCase(truongPhong.getMaNV()))
+                    ((NhanVien) nv).setMaTruongPhong(null);
+        dsNhanVien.remove(truongPhong);
+	    }
+	    
+	    private void XoaNhanVienThuong(NhanVien nhanVien) {
+	        if(nhanVien.getMaTruongPhong() != null) {
+	            TruongPhong truongPhongQL = (TruongPhong) TimTruongPhongTheoMa(nhanVien.getMaTruongPhong());
+	            if (truongPhongQL != null)
+	                truongPhongQL.LoaiBoNhanVien(nhanVien);
+	        }
+	        dsNhanVien.remove(nhanVien);
+	    }
+	    
+	    private void XoaGiamDoc(GiamDoc giamDoc) {
+	        dsNhanVien.remove(giamDoc);
+	    }
+	    
+		private void DSNhanVienChuaCoTruongPhong() {
+	        System.out.println("Danh sách nhân viên thường.");
+	        System.out.printf("%-10s | %-20s | %-10s | %-10s\n", "Ma So", "Ho Ten", "SDT", "Ma TrPh");
+	        for (QuanLyNhanSu nv: dsNhanVien)
+	            if(nv instanceof NhanVien && ((NhanVien) nv).getMaTruongPhong() == null)
+	                System.out.printf("%-10s | %-20s | %-10s | %-10s\n", nv.getMaNV(), nv.getHoTenNV(), nv.getSoDTNV(), ((NhanVien) nv).getMaTruongPhong());
+	    }
+	    
+		public void PhanBoNhanVienVaoTruongPhong() {
+	        DSNhanVienChuaCoTruongPhong();
+	        System.out.println("NHập mã nhân viên cần phân bổ: ");
+	        String maNVThuong = sc.nextLine();
+	        NhanVien nvtTimDuoc = (NhanVien) TimNVThuongTheoMa(maNVThuong);
+	        if(nvtTimDuoc == null) {
+	            System.out.println("Không tồn tại nhân viên có mã " + maNVThuong);
+	        } else {
+	            DSTruongPhong();
+	            System.out.println("Nhập mã trưởng phòng tiếp nhận: ");
+	            String maTrP = sc.nextLine();
+	            TruongPhong trPTimDuoc = (TruongPhong) TimTruongPhongTheoMa(maTrP);
+	            if(trPTimDuoc == null) {
+	                System.out.println("Không tồn tại trưởng phòng có mã là " + maTrP);
+	            } else {
+	                nvtTimDuoc.setMaTruongPhong(maTrP);
+	                trPTimDuoc.TiepNhanNhanVien(nvtTimDuoc);
+	            }
+	        }
+
+	    }
+		
+		private void DSTruongPhong() {
+	        System.out.println("Danh sách trưởng phòng:");
+	        System.out.printf("%-10s | %-20s | %-10s\n", "Ma So", "Ho Ten", "SDT");
+	        for (QuanLyNhanSu nv: dsNhanVien)
+	            if(nv instanceof TruongPhong)
+	                System.out.printf("%-10s | %-20s | %-10s\n", nv.getMaNV(), nv.getHoTenNV(), nv.getSoDTNV());
+	    }
+		
+	    public void XuatThongTinToanNhanVien() {
+	        System.out.printf("%-10s | %-20s | %-10s | %-10s | %-10s | %-10s\n", "Ma So", "Ho Ten", "SDT", "So Ngay", "Luong CB", "Luong Thang");
+	        for (QuanLyNhanSu nv: dsNhanVien) {
+	            nv.XuatThongTinNhanVien();
+	        }
+	    }
+	    
+	    public double TongLuongToanCongTy() {
+	        double tongLuongCT = 0;
+	        for (QuanLyNhanSu nv: dsNhanVien)
+	            tongLuongCT += nv.TinhLuong();
+	        return tongLuongCT;
+	    }
+	    
+	    public void NhanVienThuongCoLuongCaoNhat() {
+	        System.out.printf("%-10s | %-20s | %-10s | %-10s | %-10s | %-10s\n", "Ma So", "Ho Ten", "SDT", "So Ngay", "Luong CB", "Thuc Lanh");
+	        for (QuanLyNhanSu nv: dsNhanVien)
+	            if(nv instanceof NhanVien && ((NhanVien)nv).TinhLuong() == luongNhanVienThuongCaoNhat())
+	                nv.XuatThongTinNhanVien();
+	        System.out.println("Nhân viên thường có lương cao nhất là:" + luongNhanVienThuongCaoNhat());
+	    }
+	    
+	    private Double luongNhanVienThuongCaoNhat() {
+	        double luongNVTCaoNhat = 0;
+	        for (QuanLyNhanSu nv: dsNhanVien)
+	            if(nv instanceof NhanVien && ((NhanVien)nv).TinhLuong() > luongNVTCaoNhat)
+	                luongNVTCaoNhat = nv.TinhLuong();
+	        return luongNVTCaoNhat;
+	    }
+	    
+	    public void TruongPhongCoNhieuNhanVienNhat() {
+	        System.out.printf("%-10s | %-20s | %-10s | %-10s | %-10s | %-10s\n", "Ma So", "Ho Ten", "SDT", "So Ngay", "Luong CB", "Thuc Lanh");
+	        for (QuanLyNhanSu nv: dsNhanVien)
+	            if(nv instanceof TruongPhong && ((TruongPhong)nv).getSoLuongNV() == soLuongNhanVienDuoiQuyenNhieuNhat())
+	                nv.XuatThongTinNhanVien();
+	        System.out.println("Số lượng nhân viên dưới quyền nhiều nhất là: " + soLuongNhanVienDuoiQuyenNhieuNhat());
+	    }
+
+	    private int soLuongNhanVienDuoiQuyenNhieuNhat() {
+	        int soLuongNhieuNhat = 0;
+	        for (QuanLyNhanSu nv: dsNhanVien)
+	            if(nv instanceof TruongPhong && ((TruongPhong) nv).getSoLuongNV() > soLuongNhieuNhat)
+	                soLuongNhieuNhat = ((TruongPhong) nv).getSoLuongNV();
+	        return soLuongNhieuNhat;
+	    }
+	    
+	    public void SapXepNhanVienTheoTen() {
+	        Collections.sort(dsNhanVien, (nv1, nv2) -> nv1.LayTenNhanVien().compareTo(nv2.LayTenNhanVien()));
+	        XuatThongTinToanNhanVien();
+	    }
+	    
+	    public void SapXeoNhanVienGiamDanTheoLuong() {
+	        Collections.sort(dsNhanVien, (nv1, nv2) -> (int) (nv1.TinhLuong() - nv2.TinhLuong()));
+	        XuatThongTinToanNhanVien();
+	    }
+	    
+	    public void GiamDocCoCPNhieuNhat() {
+	        System.out.printf("%-10s | %-20s | %-10s | %-10s | %-10s | %-10s\n", "Ma So", "Ho Ten", "SDT", "So Ngay", "Luong CB", "Thuc Lanh");
+	        for (QuanLyNhanSu nv: dsNhanVien)
+	            if(nv instanceof GiamDoc && ((GiamDoc)nv).getPhanTramCoPhan() == phanTramCoPhanNhieuNhat())
+	                nv.XuatThongTinNhanVien();
+	        System.out.println("Phần trăm cổ phần nhiều nhất là: " + phanTramCoPhanNhieuNhat());
+	    }
+
+	    private float phanTramCoPhanNhieuNhat() {
+	        float ptNhieuNhat = 0;
+	        for (QuanLyNhanSu nv: dsNhanVien)
+	            if(nv instanceof GiamDoc && ((GiamDoc) nv).getPhanTramCoPhan() > ptNhieuNhat)
+	                ptNhieuNhat = ((GiamDoc) nv).getPhanTramCoPhan();
+	        return ptNhieuNhat;
+	    }
+	    
+	    public void TongThuNhapTungGiamDoc() {
+	        System.out.printf("%-10s | %-20s | %-10s | %-10s\n", "Ma So", "Ho Ten", "SDT", "Thu nhap");
+	        for (QuanLyNhanSu nv: dsNhanVien) {
+	            if(nv instanceof GiamDoc) {
+	                System.out.printf("%-10s | %-20s | %-10s | %-10.2f\n", nv.getMaNV(), nv.getHoTenNV(), nv.getSoDTNV(), nv.TinhLuong() + ((GiamDoc) nv).getPhanTramCoPhan()/100*LoiNhuanCongTy());
+	            }
+	        }
+	    }
+	    
+	    private double LoiNhuanCongTy() {
+	        return getDoanhThuThang() - TongLuongToanCongTy();
+	    }
+	    
+		public String getTenCTy() {
+			return tenCTy;
+		}
+
+		public void setTenCTy(String tenCTy) {
+			this.tenCTy = tenCTy;
+		}
+
+		public String getMSThue() {
+			return MSThue;
+		}
+
+		public void setMSThue(String mSThue) {
+			MSThue = mSThue;
+		}
+
+		public double getDoanhThuThang() {
+			return doanhThuThang;
+		}
+
+		public void setDoanhThuThang(double doanhThuThang) {
+			this.doanhThuThang = doanhThuThang;
+		}
+		
+		public List<QuanLyNhanSu> getDsNhanVien() {
+	        return dsNhanVien;
+	    }
+
+	    public void setDsNhanVien(List<QuanLyNhanSu> dsNhanVien) {
+	        this.dsNhanVien = dsNhanVien;
+	    }
+}

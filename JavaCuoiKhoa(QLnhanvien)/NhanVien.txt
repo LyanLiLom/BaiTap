@@ -1,0 +1,31 @@
+package BTbuoi11;
+
+public class NhanVien extends QuanLyNhanSu {
+		
+		private String maTruongPhong = null;
+		
+		public NhanVien() {
+	        super();
+	        setLuong1Ngay(100);
+	    }
+		
+	    @Override
+	    public void NhapThongTinNhanVien() {
+	        super.NhapThongTinNhanVien();
+	        TinhLuong();
+	    }
+
+	    @Override
+	    public void XuatThongTinNhanVien() {
+	        System.out.printf("%-10s | %-20s | %-10s | %-10d | %-10.2f | %-10.2f\n", maNV, hoTenNV, soDTNV, soNgayLamViec, luong1Ngay, TinhLuong());
+	    }
+	    
+		public String getMaTruongPhong() {
+	        return maTruongPhong;
+	    }
+
+	    public void setMaTruongPhong(String maTruongPhong) {
+	        this.maTruongPhong = maTruongPhong;
+	    }
+
+}

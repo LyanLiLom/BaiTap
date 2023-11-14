@@ -1,0 +1,131 @@
+package BTbuoi11;
+
+import java.util.Scanner;
+
+public class QuanLyNhanSu {
+		Scanner sc = new Scanner(System.in);
+		
+		protected String maNV;
+		protected String hoTenNV;
+		protected String soDTNV;
+		protected int soNgayLamViec = 0;
+		protected double luong1Ngay = 0;
+		
+		public QuanLyNhanSu() {
+			
+		}
+		
+		private void nhapMaSo() {
+	        System.out.println("Nhập mã số: ");
+	        String maSo = sc.nextLine();
+	        while(maSo.length() != 8)
+	        {
+	        	System.out.println("Mã số nhân viên chưa đúng 8 ký tự. Vui lòng nhập lại: ");
+	        	maSo = sc.nextLine();
+	        }
+	        setMaNV(maSo);
+	    }
+
+	    private void nhapHoTen() {
+	        System.out.println("Nhập họ tên: ");
+	        String hoTen = sc.nextLine();
+	        while(hoTen.isEmpty()) {
+	        	System.out.println("Tên nhân viên đang để trống, vui lòng nhập lại:");
+	        	hoTen = sc.nextLine();
+	        }
+	        setHoTenNV(hoTen);
+	    }
+
+	    private void nhapSoDienThoai() {
+	        System.out.println("Nhập số điện thoại: ");
+	        String soDienThoai = sc.nextLine();
+	        while(soDienThoai.length() != 10)
+	        {
+	        	System.out.println("Số điện thoại nhân viên chưa đúng 10 số. Vui lòng nhập lại: ");
+	        	soDienThoai = sc.nextLine();
+	        }
+	        setSoDTNV(soDienThoai);
+	    }
+
+	    protected void nhapSoNgayLamViec() {
+	        System.out.println("Vui lòng nhập số ngày làm việc của nhân viên:");
+	        int soNgayLamViec = sc.nextInt();
+	        while(soNgayLamViec < 0)
+	        {
+	        	System.out.println("Số ngày làm việc không hợp lệ vui lòng nhập lại:");
+	        	soNgayLamViec = sc.nextInt();
+	        }
+	        setSoNgayLamViec(soNgayLamViec);
+	    }
+	    
+	    public void NhapThongTinNhanVien() {
+	        nhapMaSo();
+	        nhapHoTen();
+	        nhapSoDienThoai();
+	        nhapSoNgayLamViec();
+	    }
+	    
+	    public void XuatThongTinNhanVien() {
+	        System.out.printf("%-10s | %-20s | %-10s | %-10d | %-10.2f | %-10.2f\n", maNV, hoTenNV, soDTNV, soNgayLamViec, luong1Ngay, TinhLuong());
+	    }
+		
+	    public String LayTenNhanVien() {
+	        String[] hoTen = getHoTenNV().split(" ");
+	        return hoTen[hoTen.length-1];
+	    }
+	    
+	    protected double TinhLuong() {
+	        return getLuong1Ngay() * getSoNgayLamViec();
+	    }
+	    
+		public String getMaNV() {
+			return maNV;
+		}
+
+
+		public void setMaNV(String maNV) {
+			this.maNV = maNV;
+		}
+
+
+		public String getHoTenNV() {
+			return hoTenNV;
+		}
+
+
+		public void setHoTenNV(String hoTenNV) {
+			this.hoTenNV = hoTenNV;
+		}
+
+
+		public String getSoDTNV() {
+			return soDTNV;
+		}
+
+
+		public void setSoDTNV(String soDTNV) {
+			this.soDTNV = soDTNV;
+		}
+
+
+		public int getSoNgayLamViec() {
+			return soNgayLamViec;
+		}
+
+
+		public void setSoNgayLamViec(int soNgayLamViec) {
+			this.soNgayLamViec = soNgayLamViec;
+		}
+
+
+		public double getLuong1Ngay() {
+			return luong1Ngay;
+		}
+
+
+		public void setLuong1Ngay(double luong1Ngay) {
+			this.luong1Ngay = luong1Ngay;
+		}
+			
+		
+}
